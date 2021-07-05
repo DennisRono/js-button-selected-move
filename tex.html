@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        :root {
+            --bg-color: #336699;
+            --left: 58px;
+        }
+
+        #element {
+            background-color: var(--bg-color);
+        }
+        ul{
+            display: flex;
+            margin-bottom: 50px;
+            position: relative;
+            margin: 0px;
+            position: relative;
+        }
+        li{
+            margin: 10px;
+            background-color: #fff;
+            cursor: pointer;
+            width: 105px;
+            list-style: none;
+            text-align: center;
+            padding: 5px;
+            
+        }
+        .active{
+            background-color: yellow;
+        }
+        .push{
+            transition: all 0.3s ease 0s;
+            height: 3px;
+            width: 115px;
+            border: 0px none;
+            background: rgb(41, 222, 213) none repeat scroll 0% 0%;
+            position: absolute;
+            left: var(--left);
+        }
+        #message{
+            height: 40px;
+            width: 200px;
+            background-color: #fff;
+            margin: 0px auto;
+            text-align: center;
+        }
+    </style>
+</head>
+<body id="element">
+    <ul>
+        <li class="link active" onclick="addleft(1);">Push1</li>
+        <li class="link" onclick="addleft(2);">Push2</li>
+        <li class="link" onclick="addleft(3);">Push3</li>
+        <li class="link" onclick="addleft(4);">Push4</li>
+        <li class="link" onclick="addleft(5);">Push5</li>
+    </ul>
+    <div class="push" style="left: 58px;"></div>
+    <br><br><br>
+    <div id="message">
+        left value
+    </div>
+    <script>
+        var bg_color_val = getComputedStyle(document.documentElement).getPropertyValue('--bg-color');
+        var newe = document.documentElement.style.setProperty('--bg-color', '#999999');
+        //document.getElementById('element').innerHTML = bg_color_val + newe;
+
+        var btns = document.querySelectorAll(".link");        
+        Array.from(btns).forEach(item => {
+            item.addEventListener("click", () => {
+                var blueline = document.querySelector(".push");
+                var selected = document.getElementsByClassName("active");
+                selected[0].className = selected[0].className.replace(" active", "");
+                item.className += " active";
+                // var left_val = getComputedStyle(blueline).getPropertyValue('--left');
+                // document.getElementById('message').innerHTML = left_val;
+                
+            });
+        });
+        function addleft(x){
+            var blueline = document.querySelector(".push");
+            var left = getComputedStyle(blueline).getPropertyValue('--left');
+            document.querySelector('#message').innerHTML = left;
+            if(x === 1){
+                left = 58;
+            } else if(x === 2){
+                left = 192;
+            } else if(x === 3){
+                left = 328;
+            } else if(x === 4){
+                left = 462;
+            } else if(x === 5){
+                left = 598;
+            } else {
+                left = 58;
+            }
+            //left = parseInt(left, 10) + 134;
+            pixel = left + "px";
+            document.querySelector('#message').innerHTML = pixel;
+            blueline.style.setProperty('left', pixel);
+        }
+
+        
+
+        
+    </script>
+</body>
+</html>
